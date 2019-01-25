@@ -1,0 +1,20 @@
+$color-1: #C52184;
+$color-2: #FBB13C;
+$color-3: #869D96;
+$color-4: #525B76;
+$color-5: #201E50;
+
+$font-family: 'Muli', sans-serif;
+
+// Breakpoints
+$breakpoints: (
+    sm: 500,
+    md: 768,
+    lg: 1024,
+    xl: 1200
+);
+
+$sm-screen: 500px;
+$md-screen: 768px;
+$lg-screen: 1024px;
+$xl-screen: 1200px;

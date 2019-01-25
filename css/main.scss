@@ -1,0 +1,90 @@
+@import 'partials/mixins';
+@import 'partials/variables';
+
+body {
+    height: 100vh;
+    background-image: 
+        url(/images/bg-2.jpg),
+        linear-gradient(
+            to right,
+            #FF00FF 0%,
+            #00FFFF 100%
+        );
+    background-size: cover, 2000vw;
+    background-attachment: fixed, initial;
+    background-blend-mode: color-burn;
+    background-repeat: no-repeat, no-repeat;
+    animation: bg-shift 60s infinite;
+    animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+@keyframes bg-shift {
+	0%, 100% {
+		background-position: center, left;
+	}
+    50% {
+        background-position: center, right;
+    }
+}
+
+.title-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    .title-content {
+        text-align: center;
+        text-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+
+        svg {
+            width: 20vw;
+        }
+    }
+}
+
+// Typography
+body,
+p,
+li,
+table,
+dl,
+input,
+textarea,
+select,
+button {
+    font-family: $font-family;
+    line-height: 1;
+    margin: 0;
+    color: #FFF;
+}
+
+%heading-global {
+    font-family: $font-family;
+    line-height: 1;
+    margin: 0;
+    color: #FFF;
+}
+
+@for $i from 1 through 6 {
+    h#{$i} {
+        @extend %heading-global;
+    }
+}
+
+$fluid-typography-map: (
+    h1: (32, 60),
+    h2: (28, 48),
+    h3: (24, 38),
+    h4: (20, 30),
+    h5: (18, 24),
+    h6: (16, 20),
+    p: (14, 16)
+);
+
+@each $type, $sizes in $fluid-typography-map {
+    $min: nth($sizes, 1) * 1px;
+    $max: nth($sizes, 2) * 1px;
+
+    #{$type} { @include fluid-type($min, $max); }
+}
