@@ -1,21 +1,44 @@
 @import 'partials/mixins';
 @import 'partials/variables';
 
+$from-color: rgb(0,108,255);
+$to-color: rgb(191,0,255);
+
 body {
     height: 100vh;
     background-image: 
-        url(/images/bg-2.jpg),
+        url(/images/bg-3-xs.jpg),
         linear-gradient(
             to right,
-            #FF00FF 0%,
-            #00FFFF 100%
+            $from-color 0%,
+            $to-color 100%
         );
     background-size: cover, 2000vw;
     background-attachment: fixed, initial;
-    background-blend-mode: color-burn;
+    background-blend-mode: multiply;
     background-repeat: no-repeat, no-repeat;
     animation: bg-shift 60s infinite;
     animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    @include small {
+        background-image: 
+        url(/images/bg-3-sm.jpg),
+        linear-gradient(
+            to right,
+            $from-color 0%,
+            $to-color 100%
+        );
+    }
+
+    @include medium {
+        background-image: 
+        url(/images/bg-3.jpg),
+        linear-gradient(
+            to right,
+            $from-color 0%,
+            $to-color 100%
+        );
+    }
 }
 
 @keyframes bg-shift {
@@ -34,11 +57,11 @@ body {
     height: 100vh;
 
     .title-content {
-        text-align: center;
+        text-align: left;
         text-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
 
         svg {
-            width: 20vw;
+            width: 20vmin;
         }
     }
 }
@@ -54,16 +77,26 @@ textarea,
 select,
 button {
     font-family: $font-family;
+    font-weight: 900;
     line-height: 1;
     margin: 0;
     color: #FFF;
+
+    @include small { font-weight: 700; }
+    @include medium { font-weight: 400; }
+    @include large { font-weight: 200; }
 }
 
 %heading-global {
     font-family: $font-family;
+    font-weight: 900;
     line-height: 1;
     margin: 0;
     color: #FFF;
+
+    @include small { font-weight: 700; }
+    @include medium { font-weight: 400; }
+    @include large { font-weight: 200; }
 }
 
 @for $i from 1 through 6 {
