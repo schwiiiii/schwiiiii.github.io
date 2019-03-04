@@ -46,10 +46,7 @@
     @return $remSize * 1rem;
 }
 
-$min-vw: $sm-screen;
-$max-vw: $lg-screen;
-
-@mixin fluid-type($min-font-size, $max-font-size) {
+@mixin fluid-type($min-font-size, $max-font-size, $min-vw: $sm-screen, $max-vw: $xl-screen) {
     $u1: unit($min-vw);
     $u2: unit($max-vw);
     $u3: unit($min-font-size);
@@ -60,11 +57,11 @@ $max-vw: $lg-screen;
             font-size: $min-font-size;
             font-size: calculateRem($min-font-size);
 
-            @include small {
+            @media screen and (min-width: $min-vw) {
                 font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
             }
 
-            @include large {
+            @media screen and (min-width: $max-vw) {
                 font-size: $max-font-size;
                 font-size: calculateRem($max-font-size);    
             }
