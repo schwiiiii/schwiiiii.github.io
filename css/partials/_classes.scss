@@ -1,0 +1,7 @@
+.text {
+    @each $name, $color in $color-map {
+        &-#{$name} {
+            color: $color !important;
+        }
+    }
+}

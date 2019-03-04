@@ -1,0 +1,73 @@
+@import 'variables';
+
+// Media Queries
+@mixin small {
+    @media only screen and (min-width: $sm-screen) {
+        @content;
+    }
+}
+
+@mixin medium {
+    @media only screen and (min-width: $md-screen) {
+        @content;
+    }
+}
+
+@mixin large {
+    @media only screen and (min-width: $lg-screen) {
+        @content;
+    }
+}
+
+@mixin xlarge {
+    @media only screen and (min-width: $xl-screen) {
+        @content;
+    }
+}
+
+// Remove the unit of a length
+// @param {Number} $number - Number to remove unit from
+// @return {Number} - Unitless number
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+      @return $number / ($number * 0 + 1);
+    }
+  
+    @return $number;
+}
+
+// Fluid Typography
+@function strip-unit($value) {
+    @return $value / ($value * 0 + 1);
+}
+
+@function calculateRem($size) {
+    $remSize: $size / 16px;
+    @return $remSize * 1rem;
+}
+
+$min-vw: $sm-screen;
+$max-vw: $lg-screen;
+
+@mixin fluid-type($min-font-size, $max-font-size) {
+    $u1: unit($min-vw);
+    $u2: unit($max-vw);
+    $u3: unit($min-font-size);
+    $u4: unit($max-font-size);
+
+    @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+        & {
+            font-size: $min-font-size;
+            font-size: calculateRem($min-font-size);
+
+            @include small {
+                font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+            }
+
+            @include large {
+                font-size: $max-font-size;
+                font-size: calculateRem($max-font-size);    
+            }
+        }
+    }
+}

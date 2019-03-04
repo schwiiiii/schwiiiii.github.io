@@ -1,0 +1,19 @@
+.svg-logo {
+    height: 40px;
+
+    path {
+        fill: $primary-color;
+        // animation: rainbow 20s linear infinite;
+    }
+}
+
+@keyframes rainbow {
+    @for $i from 0 to 9 {
+        #{$i * 10%} {
+            fill: adjust-hue($primary-color, ($i * 36deg));
+        }
+    }
+    100% {
+        fill: adjust-hue($primary-color, -360deg);
+    }
+}

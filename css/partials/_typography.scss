@@ -1,0 +1,51 @@
+// Typography
+body,
+p,
+li,
+table,
+dl,
+input,
+textarea,
+select,
+button {
+    font-family: $font-family;
+    font-weight: $fw-xlight;
+    line-height: 1;
+    margin: 0;
+    color: $font-color;
+}
+
+%heading-global {
+    font-family: $font-family;
+    font-weight: $fw-xbold;
+    line-height: 1;
+    margin: 0;
+    color: $heading-color;
+
+    @include small { font-weight: $fw-sbold; }
+    @include medium { font-weight: $fw-reg; }
+    @include large { font-weight: $fw-xlight; }
+}
+
+@for $i from 1 through 6 {
+    h#{$i}, .h#{$i} {
+        @extend %heading-global;
+    }
+}
+
+$fluid-typography-map: (
+    h1: (32, 60),
+    h2: (28, 48),
+    h3: (24, 38),
+    h4: (20, 30),
+    h5: (18, 24),
+    h6: (16, 20),
+    p: (14, 16)
+);
+
+@each $type, $sizes in $fluid-typography-map {
+    $min: nth($sizes, 1) * 1px;
+    $max: nth($sizes, 2) * 1px;
+
+    #{$type}, .#{$type} { @include fluid-type($min, $max); }
+}
