@@ -15,6 +15,10 @@ button {
     color: $font-color;
 }
 
+a {
+    &:hover { color: initial; }
+}
+
 %heading-global {
     font-family: $font-family;
     font-weight: $fw-sbold;

@@ -5,3 +5,12 @@
         }
     }
 }
+
+a.text {
+    @each $name, $color in $color-map {
+        &-#{$name}:focus,
+        &-#{$name}:hover {
+            color: $color !important;
+        }
+    }
+}
